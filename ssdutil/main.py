@@ -75,21 +75,7 @@ def load_ssd_vendor(device):
         except AttributeError, e:
             log_error("Failed to instantiate '%s' class: %s" % ("InnoDisk", str(e)), True)
             return -2
-    elif "SanDisk" in dvModel:
-        try:
-            module_path = os.path.dirname(os.path.abspath(__file__))
-            module_file = "/".join([module_path, VENDOR_PATH, "sandisk.py"]) 
-            module = imp.load_source("sandisk", module_file)
-        except IOError, e:
-            log_error("Failed to load VENDOR module '%s': %s" % ("sandisk" , str(e)), True)
-            return -1        
-        try:
-            ssd_vendor_class = getattr(module, "SanDisk")
-            ssd_vendor = ssd_vendor_class()
-        except AttributeError, e:
-            log_error("Failed to instantiate '%s' class: %s" % ("SanDisk", str(e)), True)
-            return -2
-        
+    else:
         pass
         # extend the ssd vendor module here
                 
